@@ -84,6 +84,25 @@ namespace BiblioStock.Servicios
             // Comprobar que el codigo no este repetido
             List<Prestamo> listaPrestamos = prestamos.ObtenerTodos();
 
+            // Verificar que el usuario no tenga tres prestamos activos
+            int prestamosActivos = 0;
+
+            foreach (Prestamo elemento in listaPrestamos)
+            {
+                if (elemento.Usuario.Identificacion ==
+                    prestamo.Usuario.Identificacion &&
+                    !elemento.Devuelto)
+                {
+                    prestamosActivos++;
+                }
+            }
+
+            if (prestamosActivos >= 3)
+            {
+                return "El usuario ya tiene tres prestamos activos. " +
+                       "Debe devolver un recurso antes de solicitar otro.";
+            }
+
             foreach (Prestamo elemento in listaPrestamos)
             {
                 if (elemento.Codigo == prestamo.Codigo)
@@ -101,6 +120,18 @@ namespace BiblioStock.Servicios
 
             if (!recurso.Disponible)
                 return "El recurso no esta disponible.";
+
+            // Verificar el plazo maximo para prestamos de libros
+            if (recurso is Libro)
+            {
+                DateTime fechaMaxima =
+                    prestamo.FechaPrestamo.Date.AddDays(14);
+
+                if (prestamo.FechaDevolucion.Date > fechaMaxima)
+                {
+                    return "El plazo maximo para prestar un libro es de 14 dias.";
+                }
+            }
 
             prestamo.Recurso = recurso;
 

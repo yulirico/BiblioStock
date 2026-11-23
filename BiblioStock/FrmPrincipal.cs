@@ -225,15 +225,17 @@ namespace BiblioStock.Formularios
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            DialogResult respuesta = MessageBox.Show(
-                "¿Desea cerrar la sesion?",
-                "Cerrar sesion",
+            DialogResult resultado = MessageBox.Show(
+                "¿Está seguro de cerrar sesión?",
+                "Cerrar sesión",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
 
-            if (respuesta == DialogResult.Yes)
+            if (resultado == DialogResult.Yes)
             {
+                SesionBibliotecario.Instancia.CerrarSesion();
+
                 FrmLogin login = new FrmLogin();
                 login.Show();
 
