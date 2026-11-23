@@ -1,5 +1,6 @@
 ﻿using BiblioStock.Modelos;
 using BiblioStock.Servicios;
+using BiblioStock.Patrones;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -73,6 +74,9 @@ namespace BiblioStock.Formularios
 
             if (bibliotecario != null)
             {
+                // Guardar bibliotecario en la sesion Singleton
+                SesionBibliotecario.Instancia.IniciarSesion(bibliotecario);
+
                 MessageBox.Show(
                     "Bienvenido, " + bibliotecario.Nombre,
                     "Acceso correcto",
@@ -80,8 +84,7 @@ namespace BiblioStock.Formularios
                     MessageBoxIcon.Information
                 );
 
-                FrmPrincipal principal =
-                    new FrmPrincipal(bibliotecario);
+                FrmPrincipal principal = new FrmPrincipal();
 
                 principal.Show();
                 this.Hide();
@@ -98,6 +101,11 @@ namespace BiblioStock.Formularios
                 txtContrasena.Clear();
                 txtContrasena.Focus();
             }
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

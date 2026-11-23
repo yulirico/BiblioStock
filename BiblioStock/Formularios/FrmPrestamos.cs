@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BiblioStock.Patrones;
 
 namespace BiblioStock.Formularios
 {
@@ -19,13 +20,13 @@ namespace BiblioStock.Formularios
         private InventarioServicio inventarioServicio;
         private ReporteServicio reporteServicio;
 
+
         private Bibliotecario bibliotecarioActual;
 
-        public FrmPrestamos(Bibliotecario bibliotecario)
+        public FrmPrestamos()
         {
             InitializeComponent();
-
-            bibliotecarioActual = bibliotecario;
+            bibliotecarioActual = SesionBibliotecario.Instancia.BibliotecarioActual;
 
             servicio = new PrestamoServicio();
             usuarioServicio = new UsuarioServicio();
@@ -38,6 +39,8 @@ namespace BiblioStock.Formularios
             CargarUsuarios();
             CargarRecursos();
             CargarPrestamos();
+            CargarLibrosParaSolicitud();
+            CargarSolicitudes();
         }
 
         // CARGAR USUARIOS
@@ -116,12 +119,7 @@ namespace BiblioStock.Formularios
             string codigo = "PRE-" +
                 DateTime.Now.ToString("yyyyMMddHHmmss");
 
-            Prestamo prestamo = new Prestamo(
-                codigo,
-                usuario,
-                recurso,
-                bibliotecarioActual,
-                dtpFechaPrestamo.Value.Date,
+            Prestamo prestamo = new Prestamo(codigo,usuario,recurso,bibliotecarioActual,dtpFechaPrestamo.Value.Date,
                 dtpFechaDevolucion.Value.Date
             );
 
@@ -133,6 +131,8 @@ namespace BiblioStock.Formularios
             {
                 CargarPrestamos();
                 CargarRecursos();
+                CargarSolicitudes();
+                CargarLibrosParaSolicitud();
                 LimpiarCampos();
             }
         }
@@ -166,6 +166,8 @@ namespace BiblioStock.Formularios
                 {
                     CargarPrestamos();
                     CargarRecursos();
+                    CargarSolicitudes();
+                    CargarLibrosParaSolicitud();
                     LimpiarCampos();
                 }
             }
@@ -203,6 +205,85 @@ namespace BiblioStock.Formularios
             dtpFechaDevolucion.Value = DateTime.Today.AddDays(7);
 
             dgvPrestamos.ClearSelection();
+        }
+
+
+        private void btnRegistrarSolicitud_Click(object sender, EventArgs e)
+        {
+            if (cmbUsuarios.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un usuario.");
+                return;
+            }
+
+            if (cmbLibrosSolicitud.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un libro.");
+                return;
+            }
+
+            Usuario usuario = cmbUsuarios.SelectedItem as Usuario;
+            Libro libro = cmbLibrosSolicitud.SelectedItem as Libro;
+
+            if (usuario == null || libro == null)
+            {
+                MessageBox.Show("No se pudieron obtener los datos seleccionados.");
+                return;
+            }
+
+            string codigo = "SOL-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+
+            SolicitudPrestamo solicitud = new SolicitudPrestamo(
+                codigo,
+                usuario,
+                libro
+            );
+
+            string resultado = servicio.RegistrarSolicitud(solicitud);
+
+            MessageBox.Show(resultado);
+
+            if (resultado.Contains("correctamente"))
+            {
+                CargarSolicitudes();
+                CargarLibrosParaSolicitud();
+            }
+        }
+
+
+        private void CargarLibrosParaSolicitud()
+        {
+            List<Recurso> recursos = inventarioServicio.ObtenerInventario();
+            List<Libro> libros = new List<Libro>();
+
+            foreach (Recurso recurso in recursos)
+            {
+                if (recurso is Libro && !recurso.Disponible)
+                {
+                    libros.Add((Libro)recurso);
+                }
+            }
+
+            cmbLibrosSolicitud.DataSource = null;
+            cmbLibrosSolicitud.DataSource = libros;
+            cmbLibrosSolicitud.DisplayMember = "Nombre";
+        }
+
+        private void CargarSolicitudes()
+        {
+            List<SolicitudPrestamo> solicitudes = servicio.ObtenerSolicitudes();
+
+            var lista = solicitudes.Select(s => new
+            {
+                Codigo = s.Codigo,
+                Usuario = s.Usuario.Nombre,
+                Identificacion = s.Usuario.Identificacion,
+                Libro = s.Libro.Nombre,
+                FechaSolicitud = s.FechaSolicitud.ToString("g")
+            }).ToList();
+
+            dgvSolicitudes.DataSource = null;
+            dgvSolicitudes.DataSource = lista;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace BiblioStock.Servicios
         private LibroRepositorio libros;
         private EquipoRepositorio equipos;
         private BibliotecarioRepositorio bibliotecarios;
+        private SolicitudPrestamoServicio solicitudes;
 
         public PrestamoServicio()
         {
@@ -24,6 +25,8 @@ namespace BiblioStock.Servicios
             libros = new LibroRepositorio();
             equipos = new EquipoRepositorio();
             bibliotecarios = new BibliotecarioRepositorio();
+
+            solicitudes = new SolicitudPrestamoServicio();
         }
 
         // Registrar un nuevo prestamo
@@ -101,6 +104,24 @@ namespace BiblioStock.Servicios
 
             prestamo.Recurso = recurso;
 
+            // Comprobar si hay solicitudes pendientes para el libro
+            if (recurso is Libro)
+            {
+                SolicitudPrestamo? primeraSolicitud =
+                    solicitudes.VerPrimeraSolicitudPorLibro(
+                        recurso.Codigo
+                    );
+
+                if (primeraSolicitud != null &&
+                    primeraSolicitud.Usuario.Identificacion !=
+                    prestamo.Usuario.Identificacion)
+                {
+                    return "El libro tiene una solicitud pendiente. " +
+                           "El primer usuario en espera es: " +
+                           primeraSolicitud.Usuario.Nombre;
+                }
+            }
+
             if (!prestamo.Validar())
                 return "Los datos del prestamo no son validos.";
 
@@ -112,8 +133,17 @@ namespace BiblioStock.Servicios
 
             GuardarRecurso(recurso);
 
+            // Retirar la solicitud si el recurso es un libro
+            if (recurso is Libro)
+            {
+                solicitudes.AtenderSolicitudPorLibro(
+                    recurso.Codigo
+                );
+            }
+
             return "Prestamo registrado correctamente.";
         }
+
 
         // Registrar la devolucion de un recurso
         public string RegistrarDevolucion(string codigoPrestamo)
@@ -148,8 +178,30 @@ namespace BiblioStock.Servicios
             // Guardar los cambios del prestamo
             prestamos.Guardar(prestamoEncontrado);
 
+            // Comprobar si hay solicitudes pendientes para el libro
+            if (prestamoEncontrado.Recurso is Libro)
+            {
+                Libro libroDevuelto = (Libro)prestamoEncontrado.Recurso;
+
+                SolicitudPrestamo? primeraSolicitud =
+                    solicitudes.VerPrimeraSolicitudPorLibro(
+                        libroDevuelto.Codigo
+                    );
+
+                if (primeraSolicitud != null)
+                {
+                    return "Devolucion registrada correctamente. " +
+                           "Hay un usuario esperando este libro: " +
+                           primeraSolicitud.Usuario.Nombre +
+                           ". Identificacion: " +
+                           primeraSolicitud.Usuario.Identificacion +
+                           ". Debe atenderse su solicitud.";
+                }
+            }
+
             return "Devolucion registrada correctamente.";
         }
+
 
         // Buscar un libro o equipo
         private Recurso ObtenerRecurso(string codigo, string tipo)
@@ -190,6 +242,18 @@ namespace BiblioStock.Servicios
             {
                 equipos.Guardar((Equipo)recurso);
             }
+        }
+
+        // Registrar una solicitud de prestamo
+        public string RegistrarSolicitud(SolicitudPrestamo solicitud)
+        {
+            return solicitudes.RegistrarSolicitud(solicitud);
+        }
+
+        // Obtener todas las solicitudes pendientes
+        public List<SolicitudPrestamo> ObtenerSolicitudes()
+        {
+            return solicitudes.ObtenerSolicitudes();
         }
     }
 }

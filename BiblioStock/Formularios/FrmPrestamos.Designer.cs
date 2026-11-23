@@ -12,8 +12,13 @@ namespace BiblioStock.Formularios
         private System.Windows.Forms.Label lblFechaDevolucion;
         private System.Windows.Forms.Label lblCodigoPrestamo;
 
+        // CONTROLES PARA SOLICITUDES
+        private System.Windows.Forms.Label lblLibroSolicitud;
+        private System.Windows.Forms.Label lblSolicitudes;
+
         private System.Windows.Forms.ComboBox cmbUsuarios;
         private System.Windows.Forms.ComboBox cmbRecursos;
+        private System.Windows.Forms.ComboBox cmbLibrosSolicitud;
 
         private System.Windows.Forms.DateTimePicker dtpFechaPrestamo;
         private System.Windows.Forms.DateTimePicker dtpFechaDevolucion;
@@ -23,8 +28,10 @@ namespace BiblioStock.Formularios
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnDevolver;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnRegistrarSolicitud;
 
         private System.Windows.Forms.DataGridView dgvPrestamos;
+        private System.Windows.Forms.DataGridView dgvSolicitudes;
 
         protected override void Dispose(bool disposing)
         {
@@ -43,8 +50,12 @@ namespace BiblioStock.Formularios
             this.lblFechaDevolucion = new System.Windows.Forms.Label();
             this.lblCodigoPrestamo = new System.Windows.Forms.Label();
 
+            this.lblLibroSolicitud = new System.Windows.Forms.Label();
+            this.lblSolicitudes = new System.Windows.Forms.Label();
+
             this.cmbUsuarios = new System.Windows.Forms.ComboBox();
             this.cmbRecursos = new System.Windows.Forms.ComboBox();
+            this.cmbLibrosSolicitud = new System.Windows.Forms.ComboBox();
 
             this.dtpFechaPrestamo = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaDevolucion = new System.Windows.Forms.DateTimePicker();
@@ -54,17 +65,21 @@ namespace BiblioStock.Formularios
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnDevolver = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnRegistrarSolicitud = new System.Windows.Forms.Button();
 
             this.dgvPrestamos = new System.Windows.Forms.DataGridView();
+            this.dgvSolicitudes = new System.Windows.Forms.DataGridView();
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSolicitudes)).BeginInit();
+
             this.SuspendLayout();
 
             // FORMULARIO
             this.Text = "Gestion de prestamos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Size = new System.Drawing.Size(1150, 760);
-            this.MinimumSize = new System.Drawing.Size(1150, 760);
+            this.Size = new System.Drawing.Size(1150, 850);
+            this.MinimumSize = new System.Drawing.Size(1150, 850);
             this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
 
             // TITULO
@@ -110,7 +125,7 @@ namespace BiblioStock.Formularios
             this.txtCodigoPrestamo.ReadOnly = true;
             this.txtCodigoPrestamo.Font = new System.Drawing.Font("Segoe UI", 10F);
 
-            // BOTONES
+            // BOTONES DE PRESTAMO
             ConfigurarBoton(this.btnRegistrar, "Registrar prestamo",
                 30, 475, System.Drawing.Color.FromArgb(37, 99, 235));
 
@@ -129,7 +144,7 @@ namespace BiblioStock.Formularios
 
             // TABLA DE PRESTAMOS
             this.dgvPrestamos.Location = new System.Drawing.Point(420, 100);
-            this.dgvPrestamos.Size = new System.Drawing.Size(680, 540);
+            this.dgvPrestamos.Size = new System.Drawing.Size(680, 300);
             this.dgvPrestamos.BackgroundColor = System.Drawing.Color.White;
             this.dgvPrestamos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPrestamos.AllowUserToAddRows = false;
@@ -146,6 +161,75 @@ namespace BiblioStock.Formularios
                 new System.Windows.Forms.DataGridViewCellEventHandler(
                     this.dgvPrestamos_CellClick);
 
+            // SECCION DE SOLICITUDES
+            ConfigurarEtiqueta(
+                this.lblSolicitudes,
+                "SOLICITUDES PENDIENTES",
+                420, 425
+            );
+
+            this.lblSolicitudes.Font = new System.Drawing.Font(
+                "Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+
+            ConfigurarEtiqueta(
+                this.lblLibroSolicitud,
+                "Libro que desea solicitar:",
+                30, 600
+            );
+
+            // COMBOBOX LIBROS PARA SOLICITUDES
+            this.cmbLibrosSolicitud.Location =
+                new System.Drawing.Point(30, 625);
+
+            this.cmbLibrosSolicitud.Size =
+                new System.Drawing.Size(350, 30);
+
+            this.cmbLibrosSolicitud.DropDownStyle =
+                System.Windows.Forms.ComboBoxStyle.DropDownList;
+
+            this.cmbLibrosSolicitud.Font =
+                new System.Drawing.Font("Segoe UI", 10F);
+
+            // BOTON REGISTRAR SOLICITUD
+            ConfigurarBoton(
+                this.btnRegistrarSolicitud,
+                "Registrar solicitud",
+                30, 680,
+                System.Drawing.Color.FromArgb(124, 58, 237)
+            );
+
+            this.btnRegistrarSolicitud.Size =
+                new System.Drawing.Size(180, 40);
+
+            this.btnRegistrarSolicitud.Click +=
+                new System.EventHandler(this.btnRegistrarSolicitud_Click);
+
+            // TABLA DE SOLICITUDES
+            this.dgvSolicitudes.Location =
+                new System.Drawing.Point(420, 465);
+
+            this.dgvSolicitudes.Size =
+                new System.Drawing.Size(680, 270);
+
+            this.dgvSolicitudes.BackgroundColor =
+                System.Drawing.Color.White;
+
+            this.dgvSolicitudes.BorderStyle =
+                System.Windows.Forms.BorderStyle.None;
+
+            this.dgvSolicitudes.AllowUserToAddRows = false;
+            this.dgvSolicitudes.AllowUserToDeleteRows = false;
+            this.dgvSolicitudes.ReadOnly = true;
+            this.dgvSolicitudes.MultiSelect = false;
+
+            this.dgvSolicitudes.SelectionMode =
+                System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
+            this.dgvSolicitudes.AutoSizeColumnsMode =
+                System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
+            this.dgvSolicitudes.RowHeadersVisible = false;
+
             // AGREGAR CONTROLES
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblUsuario);
@@ -154,8 +238,12 @@ namespace BiblioStock.Formularios
             this.Controls.Add(this.lblFechaDevolucion);
             this.Controls.Add(this.lblCodigoPrestamo);
 
+            this.Controls.Add(this.lblLibroSolicitud);
+            this.Controls.Add(this.lblSolicitudes);
+
             this.Controls.Add(this.cmbUsuarios);
             this.Controls.Add(this.cmbRecursos);
+            this.Controls.Add(this.cmbLibrosSolicitud);
 
             this.Controls.Add(this.dtpFechaPrestamo);
             this.Controls.Add(this.dtpFechaDevolucion);
@@ -165,10 +253,14 @@ namespace BiblioStock.Formularios
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.btnDevolver);
             this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnRegistrarSolicitud);
 
             this.Controls.Add(this.dgvPrestamos);
+            this.Controls.Add(this.dgvSolicitudes);
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSolicitudes)).EndInit();
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -203,3 +295,4 @@ namespace BiblioStock.Formularios
         }
     }
 }
+

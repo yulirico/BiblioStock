@@ -7,6 +7,7 @@ using BiblioStock.Servicios;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using BiblioStock.Patrones;
 
 namespace BiblioStock.Formularios
 {
@@ -14,11 +15,11 @@ namespace BiblioStock.Formularios
     {
         private Bibliotecario bibliotecarioActual;
 
-        public FrmPrincipal(Bibliotecario bibliotecario)
+        public FrmPrincipal()
         {
             InitializeComponent();
 
-            bibliotecarioActual = bibliotecario;
+            bibliotecarioActual = SesionBibliotecario.Instancia.BibliotecarioActual;
 
             // Eventos de los botones
             btnCerrarSesion.Click += btnCerrarSesion_Click;
@@ -36,7 +37,6 @@ namespace BiblioStock.Formularios
                     "Bienvenido, " + bibliotecarioActual.Nombre;
             }
 
-            // Mostrar la pantalla inicial
             MostrarInicio();
         }
 
@@ -210,7 +210,7 @@ namespace BiblioStock.Formularios
 
         private void btnPrestamos_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FrmPrestamos(bibliotecarioActual));
+            AbrirFormulario(new FrmPrestamos());
         }
 
         private void btnInventario_Click(object sender, EventArgs e)

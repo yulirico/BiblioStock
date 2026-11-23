@@ -9,18 +9,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BiblioStock.Patrones;
 
 namespace BiblioStock.Formularios
 {
     public partial class FrmLibros : Form
     {
         private LibroServicio servicio;
+        private FactoryRecurso factory;
 
         public FrmLibros()
         {
             InitializeComponent();
 
             servicio = new LibroServicio();
+            factory = new FactoryRecurso();
 
             CargarLibros();
         }
@@ -44,7 +47,7 @@ namespace BiblioStock.Formularios
                 return null;
             }
 
-            Libro libro = new Libro(
+            Libro libro = factory.CrearLibro(
                 txtCodigo.Text.Trim(),
                 txtNombre.Text.Trim(),
                 txtDescripcion.Text.Trim(),

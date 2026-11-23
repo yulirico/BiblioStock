@@ -1,5 +1,6 @@
 ﻿using BiblioStock.Modelos;
 using BiblioStock.Servicios;
+using BiblioStock.Patrones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,14 @@ namespace BiblioStock.Formularios
     public partial class FrmEquipos : Form
     {
         private EquipoServicio servicio;
+        private FactoryRecurso factory;
 
         public FrmEquipos()
         {
             InitializeComponent();
 
             servicio = new EquipoServicio();
+            factory = new FactoryRecurso();
 
             CargarEquipos();
         }
@@ -35,7 +38,7 @@ namespace BiblioStock.Formularios
 
         private Equipo ObtenerDatosFormulario()
         {
-            Equipo equipo = new Equipo(
+            Equipo equipo = factory.CrearEquipo(
                 txtCodigo.Text.Trim(),
                 txtNombre.Text.Trim(),
                 txtDescripcion.Text.Trim(),

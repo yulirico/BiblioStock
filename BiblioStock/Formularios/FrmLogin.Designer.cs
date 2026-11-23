@@ -192,6 +192,7 @@ namespace BiblioStock.Formularios
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BiblioStock - Acceso al sistema";
+            Load += FrmLogin_Load;
             pnlPrincipal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             pnlFormulario.ResumeLayout(false);
