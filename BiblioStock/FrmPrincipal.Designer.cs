@@ -5,11 +5,7 @@
         private System.ComponentModel.IContainer components = null;
 
         private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Panel pnlEncabezado;
-        private System.Windows.Forms.Panel pnlContenido;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Label lblNombreBibliotecario;
-        private System.Windows.Forms.Label lblBienvenida;
         private System.Windows.Forms.Button btnInicio;
         private System.Windows.Forms.Button btnLibros;
         private System.Windows.Forms.Button btnEquipos;
@@ -18,147 +14,286 @@
         private System.Windows.Forms.Button btnInventario;
         private System.Windows.Forms.Button btnReportes;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Panel pnlEncabezado;
+        private System.Windows.Forms.Label lblNombreBibliotecario;
+        private System.Windows.Forms.Panel pnlContenido;
+        private System.Windows.Forms.Label lblBienvenida;
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
+            {
                 components.Dispose();
+            }
 
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            this.pnlMenu = new System.Windows.Forms.Panel();
-            this.pnlEncabezado = new System.Windows.Forms.Panel();
-            this.pnlContenido = new System.Windows.Forms.Panel();
-
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblNombreBibliotecario = new System.Windows.Forms.Label();
-            this.lblBienvenida = new System.Windows.Forms.Label();
-
-            this.btnInicio = new System.Windows.Forms.Button();
-            this.btnLibros = new System.Windows.Forms.Button();
-            this.btnEquipos = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
-            this.btnPrestamos = new System.Windows.Forms.Button();
-            this.btnInventario = new System.Windows.Forms.Button();
-            this.btnReportes = new System.Windows.Forms.Button();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
-
-            this.pnlMenu.SuspendLayout();
-            this.pnlEncabezado.SuspendLayout();
-            this.pnlContenido.SuspendLayout();
-            this.SuspendLayout();
-
-            // FrmPrincipal
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 750);
-            this.MinimumSize = new System.Drawing.Size(1000, 650);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Text = "BiblioStock - Panel principal";
-            this.BackColor = System.Drawing.Color.FromArgb(240, 243, 248);
-
+            pnlMenu = new Panel();
+            lblTitulo = new Label();
+            btnInicio = new Button();
+            btnLibros = new Button();
+            btnEquipos = new Button();
+            btnUsuarios = new Button();
+            btnPrestamos = new Button();
+            btnInventario = new Button();
+            btnReportes = new Button();
+            btnCerrarSesion = new Button();
+            pnlEncabezado = new Panel();
+            lblNombreBibliotecario = new Label();
+            pnlContenido = new Panel();
+            lblBienvenida = new Label();
+            pnlMenu.SuspendLayout();
+            pnlEncabezado.SuspendLayout();
+            pnlContenido.SuspendLayout();
+            SuspendLayout();
+            // 
             // pnlMenu
-            this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(24, 42, 72);
-            this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMenu.Width = 230;
-            this.pnlMenu.Controls.Add(this.lblTitulo);
-            this.pnlMenu.Controls.Add(this.btnInicio);
-            this.pnlMenu.Controls.Add(this.btnLibros);
-            this.pnlMenu.Controls.Add(this.btnEquipos);
-            this.pnlMenu.Controls.Add(this.btnUsuarios);
-            this.pnlMenu.Controls.Add(this.btnPrestamos);
-            this.pnlMenu.Controls.Add(this.btnInventario);
-            this.pnlMenu.Controls.Add(this.btnReportes);
-            this.pnlMenu.Controls.Add(this.btnCerrarSesion);
-
+            // 
+            pnlMenu.BackColor = Color.FromArgb(24, 42, 72);
+            pnlMenu.Controls.Add(btnCerrarSesion);
+            pnlMenu.Controls.Add(btnReportes);
+            pnlMenu.Controls.Add(btnInventario);
+            pnlMenu.Controls.Add(btnPrestamos);
+            pnlMenu.Controls.Add(btnUsuarios);
+            pnlMenu.Controls.Add(btnEquipos);
+            pnlMenu.Controls.Add(btnLibros);
+            pnlMenu.Controls.Add(btnInicio);
+            pnlMenu.Controls.Add(lblTitulo);
+            pnlMenu.Dock = DockStyle.Left;
+            pnlMenu.Location = new Point(0, 0);
+            pnlMenu.Name = "pnlMenu";
+            pnlMenu.Size = new Size(230, 750);
+            pnlMenu.TabIndex = 0;
+            // 
             // lblTitulo
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(15, 25);
-            this.lblTitulo.Size = new System.Drawing.Size(200, 55);
-            this.lblTitulo.Text = "BIBLIOSTOCK";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            // 
+            lblTitulo.Dock = DockStyle.Top;
+            lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(0, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(230, 90);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "BIBLIOSTOCK";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnInicio
+            // 
+            btnInicio.BackColor = Color.FromArgb(24, 42, 72);
+            btnInicio.Cursor = Cursors.Hand;
+            btnInicio.Dock = DockStyle.Top;
+            btnInicio.FlatAppearance.BorderSize = 0;
+            btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnInicio.FlatStyle = FlatStyle.Flat;
+            btnInicio.Font = new Font("Segoe UI", 10.5F);
+            btnInicio.ForeColor = Color.White;
+            btnInicio.Location = new Point(0, 90);
+            btnInicio.Name = "btnInicio";
+            btnInicio.Padding = new Padding(28, 0, 0, 0);
+            btnInicio.Size = new Size(230, 52);
+            btnInicio.TabIndex = 1;
+            btnInicio.Text = "Inicio";
+            btnInicio.TextAlign = ContentAlignment.MiddleLeft;
+            btnInicio.UseVisualStyleBackColor = false;
+            // 
+            // btnLibros
+            // 
+            btnLibros.BackColor = Color.FromArgb(24, 42, 72);
+            btnLibros.Cursor = Cursors.Hand;
+            btnLibros.Dock = DockStyle.Top;
+            btnLibros.FlatAppearance.BorderSize = 0;
+            btnLibros.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnLibros.FlatStyle = FlatStyle.Flat;
+            btnLibros.Font = new Font("Segoe UI", 10.5F);
+            btnLibros.ForeColor = Color.White;
+            btnLibros.Location = new Point(0, 142);
+            btnLibros.Name = "btnLibros";
+            btnLibros.Padding = new Padding(28, 0, 0, 0);
+            btnLibros.Size = new Size(230, 52);
+            btnLibros.TabIndex = 2;
+            btnLibros.Text = "Libros";
+            btnLibros.TextAlign = ContentAlignment.MiddleLeft;
+            btnLibros.UseVisualStyleBackColor = false;
+            // 
+            // btnEquipos
+            // 
+            btnEquipos.BackColor = Color.FromArgb(24, 42, 72);
+            btnEquipos.Cursor = Cursors.Hand;
+            btnEquipos.Dock = DockStyle.Top;
+            btnEquipos.FlatAppearance.BorderSize = 0;
+            btnEquipos.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnEquipos.FlatStyle = FlatStyle.Flat;
+            btnEquipos.Font = new Font("Segoe UI", 10.5F);
+            btnEquipos.ForeColor = Color.White;
+            btnEquipos.Location = new Point(0, 194);
+            btnEquipos.Name = "btnEquipos";
+            btnEquipos.Padding = new Padding(28, 0, 0, 0);
+            btnEquipos.Size = new Size(230, 52);
+            btnEquipos.TabIndex = 3;
+            btnEquipos.Text = "Equipos";
+            btnEquipos.TextAlign = ContentAlignment.MiddleLeft;
+            btnEquipos.UseVisualStyleBackColor = false;
+            // 
+            // btnUsuarios
+            // 
+            btnUsuarios.BackColor = Color.FromArgb(24, 42, 72);
+            btnUsuarios.Cursor = Cursors.Hand;
+            btnUsuarios.Dock = DockStyle.Top;
+            btnUsuarios.FlatAppearance.BorderSize = 0;
+            btnUsuarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnUsuarios.FlatStyle = FlatStyle.Flat;
+            btnUsuarios.Font = new Font("Segoe UI", 10.5F);
+            btnUsuarios.ForeColor = Color.White;
+            btnUsuarios.Location = new Point(0, 246);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Padding = new Padding(28, 0, 0, 0);
+            btnUsuarios.Size = new Size(230, 52);
+            btnUsuarios.TabIndex = 4;
+            btnUsuarios.Text = "Usuarios";
+            btnUsuarios.TextAlign = ContentAlignment.MiddleLeft;
+            btnUsuarios.UseVisualStyleBackColor = false;
+            // 
+            // btnPrestamos
+            // 
+            btnPrestamos.BackColor = Color.FromArgb(24, 42, 72);
+            btnPrestamos.Cursor = Cursors.Hand;
+            btnPrestamos.Dock = DockStyle.Top;
+            btnPrestamos.FlatAppearance.BorderSize = 0;
+            btnPrestamos.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnPrestamos.FlatStyle = FlatStyle.Flat;
+            btnPrestamos.Font = new Font("Segoe UI", 10.5F);
+            btnPrestamos.ForeColor = Color.White;
+            btnPrestamos.Location = new Point(0, 298);
+            btnPrestamos.Name = "btnPrestamos";
+            btnPrestamos.Padding = new Padding(28, 0, 0, 0);
+            btnPrestamos.Size = new Size(230, 52);
+            btnPrestamos.TabIndex = 5;
+            btnPrestamos.Text = "Prestamos";
+            btnPrestamos.TextAlign = ContentAlignment.MiddleLeft;
+            btnPrestamos.UseVisualStyleBackColor = false;
+            // 
+            // btnInventario
+            // 
+            btnInventario.BackColor = Color.FromArgb(24, 42, 72);
+            btnInventario.Cursor = Cursors.Hand;
+            btnInventario.Dock = DockStyle.Top;
+            btnInventario.FlatAppearance.BorderSize = 0;
+            btnInventario.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnInventario.FlatStyle = FlatStyle.Flat;
+            btnInventario.Font = new Font("Segoe UI", 10.5F);
+            btnInventario.ForeColor = Color.White;
+            btnInventario.Location = new Point(0, 350);
+            btnInventario.Name = "btnInventario";
+            btnInventario.Padding = new Padding(28, 0, 0, 0);
+            btnInventario.Size = new Size(230, 52);
+            btnInventario.TabIndex = 6;
+            btnInventario.Text = "Inventario";
+            btnInventario.TextAlign = ContentAlignment.MiddleLeft;
+            btnInventario.UseVisualStyleBackColor = false;
+            // 
+            // btnReportes
+            // 
+            btnReportes.BackColor = Color.FromArgb(24, 42, 72);
+            btnReportes.Cursor = Cursors.Hand;
+            btnReportes.Dock = DockStyle.Top;
+            btnReportes.FlatAppearance.BorderSize = 0;
+            btnReportes.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 64, 104);
+            btnReportes.FlatStyle = FlatStyle.Flat;
+            btnReportes.Font = new Font("Segoe UI", 10.5F);
+            btnReportes.ForeColor = Color.White;
+            btnReportes.Location = new Point(0, 402);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Padding = new Padding(28, 0, 0, 0);
+            btnReportes.Size = new Size(230, 52);
+            btnReportes.TabIndex = 7;
+            btnReportes.Text = "Reportes";
+            btnReportes.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportes.UseVisualStyleBackColor = false;
+            // 
+            // btnCerrarSesion
+            // 
+            btnCerrarSesion.BackColor = Color.FromArgb(150, 40, 50);
+            btnCerrarSesion.Cursor = Cursors.Hand;
+            btnCerrarSesion.Dock = DockStyle.Bottom;
+            btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.FromArgb(180, 50, 62);
+            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
+            btnCerrarSesion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCerrarSesion.ForeColor = Color.White;
+            btnCerrarSesion.Location = new Point(0, 694);
+            btnCerrarSesion.Name = "btnCerrarSesion";
+            btnCerrarSesion.Size = new Size(230, 56);
+            btnCerrarSesion.TabIndex = 8;
+            btnCerrarSesion.Text = "Cerrar sesion";
+            btnCerrarSesion.UseVisualStyleBackColor = false;
+            // 
             // pnlEncabezado
-            this.pnlEncabezado.BackColor = System.Drawing.Color.White;
-            this.pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlEncabezado.Height = 75;
-            this.pnlEncabezado.Controls.Add(this.lblNombreBibliotecario);
-
+            // 
+            pnlEncabezado.BackColor = Color.White;
+            pnlEncabezado.Controls.Add(lblNombreBibliotecario);
+            pnlEncabezado.Dock = DockStyle.Top;
+            pnlEncabezado.Location = new Point(230, 0);
+            pnlEncabezado.Name = "pnlEncabezado";
+            pnlEncabezado.Size = new Size(970, 75);
+            pnlEncabezado.TabIndex = 1;
+            // 
             // lblNombreBibliotecario
-            this.lblNombreBibliotecario.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblNombreBibliotecario.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblNombreBibliotecario.ForeColor = System.Drawing.Color.FromArgb(45, 55, 72);
-            this.lblNombreBibliotecario.Text = "Bibliotecario";
-            this.lblNombreBibliotecario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblNombreBibliotecario.Width = 350;
-
+            // 
+            lblNombreBibliotecario.Dock = DockStyle.Right;
+            lblNombreBibliotecario.Font = new Font("Segoe UI", 11F);
+            lblNombreBibliotecario.ForeColor = Color.FromArgb(45, 55, 72);
+            lblNombreBibliotecario.Location = new Point(590, 0);
+            lblNombreBibliotecario.Name = "lblNombreBibliotecario";
+            lblNombreBibliotecario.Padding = new Padding(0, 0, 28, 0);
+            lblNombreBibliotecario.Size = new Size(380, 75);
+            lblNombreBibliotecario.TabIndex = 0;
+            lblNombreBibliotecario.Text = "Bibliotecario";
+            lblNombreBibliotecario.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // pnlContenido
-            this.pnlContenido.BackColor = System.Drawing.Color.FromArgb(240, 243, 248);
-            this.pnlContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenido.Padding = new System.Windows.Forms.Padding(30);
-            this.pnlContenido.Controls.Add(this.lblBienvenida);
-
+            // 
+            pnlContenido.BackColor = Color.FromArgb(240, 243, 248);
+            pnlContenido.Controls.Add(lblBienvenida);
+            pnlContenido.Dock = DockStyle.Fill;
+            pnlContenido.Location = new Point(230, 75);
+            pnlContenido.Name = "pnlContenido";
+            pnlContenido.Padding = new Padding(30);
+            pnlContenido.Size = new Size(970, 675);
+            pnlContenido.TabIndex = 2;
+            // 
             // lblBienvenida
-            this.lblBienvenida.AutoSize = false;
-            this.lblBienvenida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblBienvenida.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblBienvenida.ForeColor = System.Drawing.Color.FromArgb(35, 50, 75);
-            this.lblBienvenida.Height = 70;
-            this.lblBienvenida.Text = "Panel principal";
-            this.lblBienvenida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
-            // Botones del menu
-            ConfigurarBoton(this.btnInicio, "Inicio", 110);
-            ConfigurarBoton(this.btnLibros, "Libros", 170);
-            ConfigurarBoton(this.btnEquipos, "Equipos", 230);
-            ConfigurarBoton(this.btnUsuarios, "Usuarios", 290);
-            ConfigurarBoton(this.btnPrestamos, "Prestamos", 350);
-            ConfigurarBoton(this.btnInventario, "Inventario", 410);
-            ConfigurarBoton(this.btnReportes, "Reportes", 470);
-
-            this.btnCerrarSesion.Text = "Cerrar sesion";
-            this.btnCerrarSesion.BackColor = System.Drawing.Color.FromArgb(170, 45, 55);
-            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnCerrarSesion.Location = new System.Drawing.Point(15, 650);
-            this.btnCerrarSesion.Size = new System.Drawing.Size(200, 45);
-            this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCerrarSesion.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-
-            // Agregar paneles
-            this.Controls.Add(this.pnlContenido);
-            this.Controls.Add(this.pnlEncabezado);
-            this.Controls.Add(this.pnlMenu);
-
-            this.pnlMenu.ResumeLayout(false);
-            this.pnlEncabezado.ResumeLayout(false);
-            this.pnlContenido.ResumeLayout(false);
-            this.ResumeLayout(false);
-        }
-
-        private void ConfigurarBoton(
-            System.Windows.Forms.Button boton,
-            string texto,
-            int posicionY)
-        {
-            boton.Text = texto;
-            boton.BackColor = System.Drawing.Color.FromArgb(24, 42, 72);
-            boton.ForeColor = System.Drawing.Color.White;
-            boton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            boton.FlatAppearance.BorderSize = 0;
-            boton.Font = new System.Drawing.Font("Segoe UI", 10F);
-            boton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            boton.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            boton.Location = new System.Drawing.Point(15, posicionY);
-            boton.Size = new System.Drawing.Size(200, 48);
-            boton.Cursor = System.Windows.Forms.Cursors.Hand;
+            // 
+            lblBienvenida.Dock = DockStyle.Top;
+            lblBienvenida.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+            lblBienvenida.ForeColor = Color.FromArgb(35, 50, 75);
+            lblBienvenida.Location = new Point(30, 30);
+            lblBienvenida.Name = "lblBienvenida";
+            lblBienvenida.Size = new Size(910, 70);
+            lblBienvenida.TabIndex = 0;
+            lblBienvenida.Text = "Panel principal";
+            lblBienvenida.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // FrmPrincipal
+            // 
+            AutoScaleDimensions = new SizeF(8F, 16F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(240, 243, 248);
+            ClientSize = new Size(1200, 750);
+            Controls.Add(pnlContenido);
+            Controls.Add(pnlEncabezado);
+            Controls.Add(pnlMenu);
+            MinimumSize = new Size(1000, 650);
+            Name = "FrmPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "BiblioStock - Panel principal";
+            WindowState = FormWindowState.Maximized;
+            pnlMenu.ResumeLayout(false);
+            pnlEncabezado.ResumeLayout(false);
+            pnlContenido.ResumeLayout(false);
+            ResumeLayout(false);
         }
     }
 }
