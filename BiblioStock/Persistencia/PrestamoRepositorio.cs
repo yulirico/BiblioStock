@@ -51,7 +51,6 @@ namespace BiblioStock.Persistencia
                     Recurso recurso = null;
                     Bibliotecario bibliotecario = null;
 
-                    // Buscar el usuario
                     foreach (Usuario elemento in listaUsuarios)
                     {
                         if (elemento.Identificacion == datos[1])
@@ -61,7 +60,6 @@ namespace BiblioStock.Persistencia
                         }
                     }
 
-                    // Buscar el recurso
                     if (datos[3] == "Libro")
                     {
                         foreach (Libro elemento in listaLibros)
@@ -85,7 +83,6 @@ namespace BiblioStock.Persistencia
                         }
                     }
 
-                    // Buscar el bibliotecario
                     foreach (Bibliotecario elemento in listaBibliotecarios)
                     {
                         if (elemento.Identificacion == datos[7])
@@ -95,7 +92,6 @@ namespace BiblioStock.Persistencia
                         }
                     }
 
-                    // Crear el prestamo si existen las relaciones
                     if (usuario != null &&
                         recurso != null &&
                         bibliotecario != null)

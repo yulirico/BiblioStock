@@ -19,7 +19,6 @@ namespace BiblioStock.Servicios
             prestamos = new PrestamoRepositorio();
         }
 
-        // Registrar un libro
         public string RegistrarLibro(Libro libro)
         {
             if (libro == null)
@@ -41,7 +40,6 @@ namespace BiblioStock.Servicios
             return "Libro registrado correctamente.";
         }
 
-        // Actualizar un libro
         public string ActualizarLibro(Libro libro)
         {
             if (libro == null)
@@ -66,7 +64,6 @@ namespace BiblioStock.Servicios
             if (libroEncontrado == null)
                 return "El libro no esta registrado.";
 
-            // Conservar la disponibilidad actual
             libro.Disponible = libroEncontrado.Disponible;
 
             repositorio.Guardar(libro);
@@ -74,13 +71,11 @@ namespace BiblioStock.Servicios
             return "Libro actualizado correctamente.";
         }
 
-        // Consultar todos los libros
         public List<Libro> ObtenerLibros()
         {
             return repositorio.ObtenerTodos();
         }
 
-        // Buscar un libro por codigo
         public Libro BuscarLibro(string codigo)
         {
             List<Libro> libros = repositorio.ObtenerTodos();
@@ -94,7 +89,6 @@ namespace BiblioStock.Servicios
             return null;
         }
 
-        // Eliminar un libro
         public string EliminarLibro(string codigo)
         {
             List<Prestamo> listaPrestamos = prestamos.ObtenerTodos();

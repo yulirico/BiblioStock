@@ -19,7 +19,6 @@ namespace BiblioStock.Servicios
             solicitudes = new Cola<SolicitudPrestamo>();
             repositorio = new SolicitudPrestamoRepositorio();
 
-            // Recuperar las solicitudes guardadas
             List<SolicitudPrestamo> lista =
                 repositorio.ObtenerTodos();
 
@@ -29,7 +28,6 @@ namespace BiblioStock.Servicios
             }
         }
 
-        // Registrar una nueva solicitud
         public string RegistrarSolicitud(SolicitudPrestamo solicitud)
         {
             if (solicitud == null)
@@ -46,7 +44,6 @@ namespace BiblioStock.Servicios
 
             if (!solicitud.Libro.Disponible)
             {
-                // El libro ya esta prestado, se permite solicitar turno
             }
             else
             {
@@ -69,38 +66,32 @@ namespace BiblioStock.Servicios
                 }
             }
 
-            // Agregar a la cola y guardar
             solicitudes.Encolar(solicitud);
             repositorio.Guardar(solicitud);
 
             return "Solicitud registrada correctamente.";
         }
 
-        // Consultar la primera solicitud de toda la cola
         public SolicitudPrestamo? VerPrimeraSolicitud()
         {
             return solicitudes.VerPrimero();
         }
 
-        // Consultar la cantidad de solicitudes
         public int ObtenerCantidadSolicitudes()
         {
             return solicitudes.Contar();
         }
 
-        // Obtener todas las solicitudes
         public List<SolicitudPrestamo> ObtenerSolicitudes()
         {
             return solicitudes.ObtenerElementos();
         }
 
-        // Comprobar si existen solicitudes
         public bool HaySolicitudes()
         {
             return !solicitudes.EstaVacia();
         }
 
-        // Consultar solicitudes de un libro específico
         public List<SolicitudPrestamo> ObtenerSolicitudesPorLibro(
             string codigoLibro)
         {
@@ -121,7 +112,6 @@ namespace BiblioStock.Servicios
             return resultado;
         }
 
-        // Consultar el primer turno de un libro sin retirarlo
         public SolicitudPrestamo? VerPrimeraSolicitudPorLibro(
             string codigoLibro)
         {
@@ -139,7 +129,6 @@ namespace BiblioStock.Servicios
             return null;
         }
 
-        // Atender una solicitud específica
         public bool AtenderSolicitudPorLibro(string codigoLibro)
         {
             SolicitudPrestamo? solicitud =

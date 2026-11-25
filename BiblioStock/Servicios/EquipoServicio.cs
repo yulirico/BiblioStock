@@ -20,7 +20,6 @@ namespace BiblioStock.Servicios
             prestamos = new PrestamoRepositorio();
         }
 
-        // Registrar un equipo
         public string RegistrarEquipo(Equipo equipo)
         {
             if (equipo == null)
@@ -45,7 +44,6 @@ namespace BiblioStock.Servicios
             return "Equipo registrado correctamente.";
         }
 
-        // Actualizar un equipo
         public string ActualizarEquipo(Equipo equipo)
         {
             if (equipo == null)
@@ -70,7 +68,6 @@ namespace BiblioStock.Servicios
             if (equipoEncontrado == null)
                 return "El equipo no esta registrado.";
 
-            // Comprobar que el numero de serie no este repetido
             foreach (Equipo elemento in equipos)
             {
                 if (elemento.Codigo != equipo.Codigo &&
@@ -80,7 +77,6 @@ namespace BiblioStock.Servicios
                 }
             }
 
-            // Conservar la disponibilidad actual
             equipo.Disponible = equipoEncontrado.Disponible;
 
             repositorio.Guardar(equipo);
@@ -88,13 +84,11 @@ namespace BiblioStock.Servicios
             return "Equipo actualizado correctamente.";
         }
 
-        // Consultar todos los equipos
         public List<Equipo> ObtenerEquipos()
         {
             return repositorio.ObtenerTodos();
         }
 
-        // Buscar un equipo por codigo
         public Equipo BuscarEquipo(string codigo)
         {
             List<Equipo> equipos = repositorio.ObtenerTodos();
@@ -108,7 +102,6 @@ namespace BiblioStock.Servicios
             return null;
         }
 
-        // Eliminar un equipo
         public string EliminarEquipo(string codigo)
         {
             List<Prestamo> listaPrestamos = prestamos.ObtenerTodos();

@@ -29,7 +29,6 @@ namespace BiblioStock.Servicios
             solicitudes = new SolicitudPrestamoServicio();
         }
 
-        // Registrar un nuevo prestamo
         public string RegistrarPrestamo(Prestamo prestamo)
         {
             if (prestamo == null)
@@ -42,7 +41,6 @@ namespace BiblioStock.Servicios
                 return "Faltan datos del prestamo.";
             }
 
-            // Comprobar que el usuario exista
             bool usuarioExiste = false;
 
             List<Usuario> listaUsuarios = usuarios.ObtenerTodos();
@@ -61,7 +59,6 @@ namespace BiblioStock.Servicios
             if (!usuarioExiste)
                 return "El usuario no esta registrado.";
 
-            // Comprobar que el bibliotecario exista
             bool bibliotecarioExiste = false;
 
             List<Bibliotecario> listaBibliotecarios =
@@ -81,10 +78,8 @@ namespace BiblioStock.Servicios
             if (!bibliotecarioExiste)
                 return "El bibliotecario no esta registrado.";
 
-            // Comprobar que el codigo no este repetido
             List<Prestamo> listaPrestamos = prestamos.ObtenerTodos();
 
-            // Verificar que el usuario no tenga tres prestamos activos
             int prestamosActivos = 0;
 
             foreach (Prestamo elemento in listaPrestamos)
@@ -109,7 +104,6 @@ namespace BiblioStock.Servicios
                     return "Ya existe un prestamo con ese codigo.";
             }
 
-            // Recuperar el recurso actualizado
             Recurso recurso = ObtenerRecurso(
                 prestamo.Recurso.Codigo,
                 prestamo.Recurso.GetType().Name
@@ -121,7 +115,6 @@ namespace BiblioStock.Servicios
             if (!recurso.Disponible)
                 return "El recurso no esta disponible.";
 
-            // Verificar el plazo maximo para prestamos de libros
             if (recurso is Libro)
             {
                 DateTime fechaMaxima =
@@ -135,7 +128,6 @@ namespace BiblioStock.Servicios
 
             prestamo.Recurso = recurso;
 
-            // Comprobar si hay solicitudes pendientes para el libro
             if (recurso is Libro)
             {
                 SolicitudPrestamo? primeraSolicitud =
@@ -156,15 +148,12 @@ namespace BiblioStock.Servicios
             if (!prestamo.Validar())
                 return "Los datos del prestamo no son validos.";
 
-            // Guardar el prestamo
             prestamos.Guardar(prestamo);
 
-            // Cambiar la disponibilidad del recurso
             recurso.Disponible = false;
 
             GuardarRecurso(recurso);
 
-            // Retirar la solicitud si el recurso es un libro
             if (recurso is Libro)
             {
                 solicitudes.AtenderSolicitudPorLibro(
@@ -176,7 +165,6 @@ namespace BiblioStock.Servicios
         }
 
 
-        // Registrar la devolucion de un recurso
         public string RegistrarDevolucion(string codigoPrestamo)
         {
             List<Prestamo> listaPrestamos = prestamos.ObtenerTodos();
@@ -198,18 +186,14 @@ namespace BiblioStock.Servicios
             if (prestamoEncontrado.Devuelto)
                 return "Este recurso ya fue devuelto.";
 
-            // Actualizar el estado del prestamo
             prestamoEncontrado.Devuelto = true;
 
-            // Actualizar la disponibilidad del recurso
             prestamoEncontrado.Recurso.Disponible = true;
 
             GuardarRecurso(prestamoEncontrado.Recurso);
 
-            // Guardar los cambios del prestamo
             prestamos.Guardar(prestamoEncontrado);
 
-            // Comprobar si hay solicitudes pendientes para el libro
             if (prestamoEncontrado.Recurso is Libro)
             {
                 Libro libroDevuelto = (Libro)prestamoEncontrado.Recurso;
@@ -234,7 +218,6 @@ namespace BiblioStock.Servicios
         }
 
 
-        // Buscar un libro o equipo
         private Recurso ObtenerRecurso(string codigo, string tipo)
         {
             if (tipo == "Libro")
@@ -262,7 +245,6 @@ namespace BiblioStock.Servicios
             return null;
         }
 
-        // Guardar los cambios de disponibilidad
         private void GuardarRecurso(Recurso recurso)
         {
             if (recurso is Libro)
@@ -275,13 +257,11 @@ namespace BiblioStock.Servicios
             }
         }
 
-        // Registrar una solicitud de prestamo
         public string RegistrarSolicitud(SolicitudPrestamo solicitud)
         {
             return solicitudes.RegistrarSolicitud(solicitud);
         }
 
-        // Obtener todas las solicitudes pendientes
         public List<SolicitudPrestamo> ObtenerSolicitudes()
         {
             return solicitudes.ObtenerSolicitudes();

@@ -9,7 +9,6 @@ namespace BiblioStock.Patrones
 {
     public class FactoryRecurso
     {
-        // Crear un libro
         public Libro CrearLibro(
             string codigo,
             string nombre,
@@ -32,7 +31,6 @@ namespace BiblioStock.Patrones
             return libro;
         }
 
-        // Crear un equipo
         public Equipo CrearEquipo(
             string codigo,
             string nombre,

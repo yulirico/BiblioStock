@@ -21,7 +21,6 @@ namespace BiblioStock.Persistencia
             libros = new LibroRepositorio();
         }
 
-        // Obtener todas las solicitudes guardadas
         public List<SolicitudPrestamo> ObtenerTodos()
         {
             List<SolicitudPrestamo> solicitudes =
@@ -89,7 +88,6 @@ namespace BiblioStock.Persistencia
             return solicitudes;
         }
 
-        // Guardar una solicitud
         public void Guardar(SolicitudPrestamo solicitud)
         {
             List<SolicitudPrestamo> solicitudes = ObtenerTodos();
@@ -130,7 +128,6 @@ namespace BiblioStock.Persistencia
             archivo.GuardarArchivo(registros);
         }
 
-        // Eliminar una solicitud por su codigo
         public bool Eliminar(string codigo)
         {
             List<SolicitudPrestamo> solicitudes = ObtenerTodos();

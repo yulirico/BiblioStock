@@ -19,7 +19,6 @@ namespace BiblioStock.Servicios
             prestamos = new PrestamoRepositorio();
         }
 
-        // Registrar un usuario
         public string RegistrarUsuario(Usuario usuario)
         {
             if (usuario == null)
@@ -41,7 +40,6 @@ namespace BiblioStock.Servicios
             return "Usuario registrado correctamente.";
         }
 
-        // Actualizar un usuario
         public string ActualizarUsuario(Usuario usuario)
         {
             if (usuario == null)
@@ -71,13 +69,11 @@ namespace BiblioStock.Servicios
             return "Usuario actualizado correctamente.";
         }
 
-        // Consultar todos los usuarios
         public List<Usuario> ObtenerUsuarios()
         {
             return repositorio.ObtenerTodos();
         }
 
-        // Buscar un usuario por identificacion
         public Usuario BuscarUsuario(string identificacion)
         {
             List<Usuario> usuarios = repositorio.ObtenerTodos();
@@ -91,7 +87,6 @@ namespace BiblioStock.Servicios
             return null;
         }
 
-        // Eliminar un usuario
         public string EliminarUsuario(string identificacion)
         {
             Usuario usuario = BuscarUsuario(identificacion);
